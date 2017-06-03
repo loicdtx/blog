@@ -3,7 +3,7 @@ title: Loïc's blog
 description: 'Science, programming (R, python), and other stuff'
 url: http://www.loicdutrieux.net/blog
 date_format: '%B %d, %Y'
-fort_awesome_icon: 'cog fa-spin'
+fort_awesome_icon: 'rocket'
 
 # Owner configuration
 # name and email are required (change code to remove these)
@@ -27,7 +27,7 @@ sharing:
     reddit: true
 
 # Disqus comments configuration (leave blank to disable comments)
-disqus_shortname: 'loicdtx'
+disqus_shortname: 'loic-blog-2'
 
 # Jekyll configuration
 permalink: /:year/:month/:day/:title/
