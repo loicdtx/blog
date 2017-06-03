@@ -1,7 +1,7 @@
 # Site wide configuration
-title: Trio
-description: 'A simple content-focused Jekyll theme'
-url: http://www.perfectlyrandom.org/trio
+title: Loïc's blog
+description: 'Science, programming (R, python), and other stuff'
+url: http://www.loicdutrieux.net/blog
 date_format: '%B %d, %Y'
 fort_awesome_icon: 'cog fa-spin'
 
@@ -9,11 +9,11 @@ fort_awesome_icon: 'cog fa-spin'
 # name and email are required (change code to remove these)
 # (leave the rest blank to disable the corresponding sharing button)
 owner:
-    name: Ankur Gupta
-    email: ankur@perfectlyrandom.org
-    github: ankur-gupta
-    twitter: ankurIO
-    linkedin: ankurguptawisc
+    name: Loïc Dutrieux 
+    email: loic.dutrieux@gmail.com
+    github: loicdtx
+    twitter: 
+    linkedin: loicdutrieux
     facebook:
     google_plus:
     youtube:
@@ -27,7 +27,7 @@ sharing:
     reddit: true
 
 # Disqus comments configuration (leave blank to disable comments)
-disqus_shortname: 'perfectlyrandom-trio'
+disqus_shortname: 'loicdtx'
 
 # Jekyll configuration
 permalink: /:year/:month/:day/:title/
