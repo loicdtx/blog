@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Welcome to Trio
+title: Hello
 date: 2017-06-03
 update_date: 2017-06-03
 summary: What is this blog about?
