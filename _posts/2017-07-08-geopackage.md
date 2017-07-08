@@ -206,7 +206,7 @@ st_write(sf_df_buffer, dsn = '/home/loic/sandbox/cities_sf.gpkg', layer = 'citie
 
 Thanks to the leaflet package it's easy to visualize the spatial objects created in an interactive webmap.
 
-<iframe src="/blog/html/geopackage_leaflet.html" name="targetframe" scrolling="no" frameborder="0" style="position: relative; width: 95%; height: 230; display:block;">
+<iframe src="/blog/html/geopackage_leaflet.html" name="targetframe" scrolling="no" frameborder="0" style="display: block; padding: 10px 10px; width: 100%; height: 300px; border: 0px;">
     </iframe>
 
 We can try with `sp` as well, starting from the `df` object created above.
