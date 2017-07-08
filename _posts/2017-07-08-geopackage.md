@@ -20,9 +20,9 @@ So let's see how this geopackage format plays with the tools I usually use to re
 
 ## Python
 
-Fiona is probably the most pythonic library for reading and writing geospatial vector data, and that's what I will use in the example below. When using fiona, you have to work with dictionary representations of your features and these can be written to geospatial files almost as easily as it would be to write a string to a text file. [OGR](http://gdal.org/1.11/ogr/) is obviously the workhorse that enables reading from and writing to the different vector formats. Note that fiona is not the only way to read and write geospatial vector data; geopandas is a very interesting project as well which can do as much with a slightly different data structure and philosophy. But we'll stick to fiona here.
+`fiona` is probably the most pythonic library for reading and writing geospatial vector data, and that's what I will use in the example below. When using `fiona`, you have to work with dictionary representations of your features and these can be written to geospatial files almost as easily as it would be to write a string to a text file. [OGR](http://gdal.org/1.11/ogr/) is obviously the workhorse that enables reading from and writing to the different vector formats. Note that `fiona` is not the only way to read and write geospatial vector data; `geopandas` is a very interesting project as well which can do as much with a slightly different data structure and philosophy. But we'll stick to `fiona` here.
 
-> Note: fiona may come in the form of a binary wheel when installed with pip. This means that it comes with its own version of gdal/OGR, to which it is statically linked. Unfortunately the binaries that come with the current fiona version (1.7.7) do not include the geopackage driver. It might therefore be necessary to install fiona from source in order to allow it to dynamically link to your system gdal. Don't freak out, this is actually pretty easy, just run `pip install -I fiona --no-binary fiona` and you will be good to go.
+> Note: `fiona` may come in the form of a binary wheel when installed with pip. This means that it comes with its own version of gdal/OGR, to which it is statically linked. Unfortunately the binaries that come with the current `fiona` version (1.7.7) do not include the geopackage driver. It might therefore be necessary to install `fiona` from source in order to allow it to dynamically link to your system gdal. Don't freak out, this is actually pretty easy, just run `pip install -I fiona --no-binary fiona` and you will be good to go.
 
 The code below queries the coordinates of some cities where I've lived (I admit selecting only those with a non ambiguous name, ... no spaces, accents or dashes), builds the features and writes them to a geopackage file.
 
@@ -68,7 +68,7 @@ with fiona.open('/home/loic/sandbox/cities_fiona.gpkg', 'w',
         dst.write(feature)
 ```
 
-Writing a feature collection to geopackage with fiona is therefore very similar to writing to a shapefile; the only difference is that you have to specify the layer name (only if you want to use the multi-layer capabilities of geopackage). We can verify that the features were properly written by running `ogrinfo`.
+Writing a feature collection to geopackage with `fiona` is therefore very similar to writing to a shapefile; the only difference is that you have to specify the layer name (only if you want to use the multi-layer capabilities of geopackage). We can verify that the features were properly written by running `ogrinfo`.
 
 ```sh
 ogrinfo cities_fiona.gpkg
@@ -234,7 +234,7 @@ This is not optimal but still better than the shapefile option.
 
 So to conclude:
 
-- Geopackage is a convenient, lightweight, geospatial data storage format
+- Geopackage is a convenient and lightweight geospatial data storage format
 - It's mature and fully operable with the common GIS tools (QGIS, ArcGIS, R, python) 
 - I found only one minor limitation; the lack of multi-layer support of `writeOGR`
 - Writing this post took longer than expected
