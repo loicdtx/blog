@@ -8,13 +8,13 @@ logo: map-marker
 
 TLDR: There are really no reasons to keep using shapefiles, use geopackage (`.gpkg`) instead.
 
-[Geopackage](http://www.geopackage.org/) is an open file format to store geographical data in vector format (and apparently also raster format, but we'll focus on the vector part for now). The format has been around for a few years, but it only caught my attention recently when it was mentioned on the R-SIG-geo mailing list [post](http://r-sig-geo.2731867.n2.nabble.com/proj4string-read-by-readOGR-doesn-t-seem-to-precisely-specify-source-shapefile-projection-td7591243.html#a7591248). I'm usually quite attentive to new things but I definitely missed that one!! Anyway, the reason this caught my attention is that I have been looking for alternatives to shapefile for a long time. So I decided to investigate this gpkg format a bit; particularly how to read and write it with the R and python's main open source libraries, as well as QGIS.
+[Geopackage](http://www.geopackage.org/) is an open file format to store geographical data in vector format (and apparently also raster format, but we'll focus on the vector part for now). The format has been around for a few years, but it only caught my attention recently when it was mentioned in a R-SIG-geo mailing list [post](http://r-sig-geo.2731867.n2.nabble.com/proj4string-read-by-readOGR-doesn-t-seem-to-precisely-specify-source-shapefile-projection-td7591243.html#a7591248). I'm usually quite attentive to new things but I definitely missed that one!! Anyway, the reason this caught my attention is that I have been looking for alternatives to shapefile for a long time. So I decided to investigate this gpkg format a bit; particularly how to read and write it with the R and python's main open source libraries, as well as QGIS.
 
 Shapefiles have been around for much longer than I can remember and served us well, but it's no big news that the format has some serious limitations. Let's start with the fact that one file is in fact composed of at least 3 files (usually more); a very inconvenient characteristic when you want to move things around or e-mail data to someone. Shapefiles are like sliced bread, but without any wrapping around it to keep the slices together.
 Another, perhaps worse, characteristic of shapefiles is that field names (the names of the columns of the 'attribute table') are limited to 10 characters... yes, just 10!!! I can't recall how many times I've seen the warning message from `writeOGR` telling me that field names were being abbreviated when writing a carefully crafted `Spatial*DataFrame` (`*` being any of `Lines`, `Polygons`, or `Points`) to shapefile; so frustrating!! I wouldn't call shapefiles a nightmare but we're close...
-But despite these limitations, shapefiles are ubiquitous, we've all used it, and we almost all agree that it's the 'lingua franca' of the GIS world (as described by Tom MacWright in a rather old but still very informative [blog post](https://macwright.org/2012/10/31/gis-with-python-shapely-fiona.html)).
+But despite these limitations, shapefiles are ubiquitous, we've all used them, and we almost all agree that it's the 'lingua franca' of the GIS world (as described by Tom MacWright in a rather old but still very informative [blog post](https://macwright.org/2012/10/31/gis-with-python-shapely-fiona.html)).
 
-My previous attempts to find alternatives to shapefiles were not entirely successful. I tried [spatialite](https://en.wikipedia.org/wiki/SpatiaLite) a few years ago, but faced some limitations when trying to write multiple layers to a single file. Another limitation of spatialite is its weight; an empty spatialite database will take about 6MB of disk space; not exactly my definition of lightweight. So at the end I was left telling people that shapefiles are 'bad' but without being able to propose any reasonable alternative. The word *reasonable* is important here as not everyone wants to setup a postGIS database to visualize a bunch of GPS points. An ideal format would be lightweight, self contained, and easy to use for non GIS specialist. GPKG appears to fulfill that role perfectly, finally!!
+My previous attempts to find alternatives to shapefiles were not entirely successful. I tried [spatialite](https://en.wikipedia.org/wiki/SpatiaLite) a few years ago, but faced some limitations when trying to write multiple layers to a single file. Another limitation of spatialite is its weight; an empty spatialite database will take about 6MB of disk space; not exactly my definition of lightweight. So at the end I was left telling people that shapefiles were 'bad' but without being able to propose any reasonable alternative. The word *reasonable* is important here as not everyone wants to setup a postGIS database to visualize a bunch of GPS points. An ideal format would be lightweight, self contained, and easy to use for non GIS specialist. GPKG appears to fulfill that role perfectly, finally!!
 
 So let's see how this geopackage format plays with the tools I usually use to read, write and manipulate vector data. First python and then R.
 
@@ -174,10 +174,10 @@ Now that we know that python can read and write geopackage files and even handle
 A small reminder about R and spatial data; there are two packages to work with vector data; `sp` and `sf`.
 The two packages are absolutely not competitors, they are actually from the same people (in particular Edzer Pebesma and Roger Bivand who have been very consistent members/contributors of the R spatial community basically since its beginning).
 So `sf` is sort of the new iteration of `sp`. The idea of the `sf` package is described in [this blog post](http://r-spatial.org/r/2016/02/15/simple-features-for-r.html), and in the original [project proposal](https://github.com/edzer/sfr/blob/master/PROPOSAL.md).
-With `sp` data can be read and written using `readOGR` and `writeOGR` respectively, while `st_read` and `st_write` play that role in `sf`. 
+With `sp`, data can be read and written using `readOGR` and `writeOGR` respectively, while `st_read` and `st_write` play that role in `sf`. 
 
 The code below more or less reproduces the steps of the python example above.
-First, coordinates of a vector of cities are queried to the google maps API, the result is coerced to a `sf` dataframe, buffer are computer around the cities and both layers are written to a single geopackage file.
+First, coordinates of a vector of cities are queried from the google maps API, the result is coerced to a `sf` dataframe, buffer are computer around the cities and both layers are written to a single geopackage file.
 Note that I took a shortcut in the buffering step and did not project the data prior to buffering as I should have done.
 
 ```R
@@ -240,7 +240,7 @@ So to conclude:
 - Writing this post took longer than expected
 
 
-If you're a GIS guy, give it a try and promote geopackage around you, to your colleagues and collaborators; if you teach GIS, introduce it as the preferred data storage option; and if you're neither of these then I really wonder why you are reading that right now... ;-) 
+If you're a GIS guy, give it a try and promote geopackage around you, to your colleagues and collaborators; if you teach GIS, introduce it as the preferred data storage option; and if you're neither of these then I really wonder why you are reading this right now... ;-) 
 
 I can not longer find a good reason to keep using shapefiles. Can you?
 
